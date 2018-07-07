@@ -1,13 +1,13 @@
 <ion-header>
-    <ion-navbar color="primary">
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title>Lista de Senadores</ion-title>
-    </ion-navbar>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Lista de Senadores</ion-title>
+  </ion-navbar>
 </ion-header>
 
-<ion-content padding class="common-bg"> 
+<ion-content padding class="common-bg">
   <ion-card class="full-width" no-margin margin-bottom>
     <ion-card-content no-padding>
 
@@ -21,21 +21,23 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-list *ngFor="let state of stateListSelecteds">
-    <ion-list-header>
-      <div class="block">{{ state?.name }}</div>
-      <div class="right-initials">{{ state?.initials }}</div>
-    </ion-list-header>
+  <ion-list *ngFor="let state of listSenatorByState">
+    <div  *ngIf="state?.senators?.length > 0" >
+      <ion-list-header>
+        <div class="block">{{ state?.name }}</div>
+        <div class="right-initials">{{ state?.initials }}</div>
+      </ion-list-header>
 
-    <ion-item-sliding>
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="assets/img/ionic3-ico.png">
-        </ion-avatar>
-        <h2>Venkman</h2>
-        <p>Back off man, I'm a scientist.</p>
-      </ion-item>
-    </ion-item-sliding>
+      <ion-item-sliding>
+        <ion-item *ngFor="let senator of state?.senators">
+          <ion-avatar item-start>
+            <img [src]="senator.identificacaoParlamentar.urlFotoParlamentar">
+          </ion-avatar>
+          <h2>{{senator.identificacaoParlamentar.nomeParlamentar}}</h2>
+          <p>{{senator.identificacaoParlamentar.formaTratamento}} | {{senator.identificacaoParlamentar.siglaPartidoParlamentar}}</p>
+        </ion-item>
+      </ion-item-sliding>
 
-   </ion-list>
+    </div>
+  </ion-list>
 </ion-content>
