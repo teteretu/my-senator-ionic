@@ -22,21 +22,23 @@
   </ion-card>
 
   <ion-list *ngFor="let state of listSenatorByState">
-    <div  *ngIf="state?.senators?.length > 0" >
+    <div *ngIf="state?.senators?.length > 0">
       <ion-list-header>
         <div class="block">{{ state?.name }}</div>
         <div class="right-initials">{{ state?.initials }}</div>
       </ion-list-header>
-
-      <ion-item-sliding>
-        <ion-item *ngFor="let senator of state?.senators">
-          <ion-avatar item-start>
-            <img [src]="senator.identificacaoParlamentar.urlFotoParlamentar">
-          </ion-avatar>
-          <h2>{{senator.identificacaoParlamentar.nomeParlamentar}}</h2>
-          <p>{{senator.identificacaoParlamentar.formaTratamento}} | {{senator.identificacaoParlamentar.siglaPartidoParlamentar}}</p>
-        </ion-item>
-      </ion-item-sliding>
+      
+      <div *ngFor="let senator of state?.senators">
+        <ion-item-sliding (click)="openDetail(senator)">
+          <ion-item>
+            <ion-avatar item-start>
+              <img [src]="senator.identificacaoParlamentar.urlFotoParlamentar">
+            </ion-avatar>
+            <h2>{{senator.identificacaoParlamentar.nomeParlamentar}}</h2>
+            <p>{{senator.identificacaoParlamentar.formaTratamento}} | {{senator.identificacaoParlamentar.siglaPartidoParlamentar}}</p>
+          </ion-item>
+        </ion-item-sliding>
+      </div>
 
     </div>
   </ion-list>

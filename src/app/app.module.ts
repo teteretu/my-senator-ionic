@@ -24,6 +24,7 @@ import {TripDetailPage} from "../pages/trip-detail/trip-detail";
 import {TripsPage} from "../pages/trips/trips";
 import {SenatorListPage} from "../pages/senator-list/senator-list";
 import { SenatorProvider } from "../providers/senator/senator";
+import { SenatorDetailPage } from "../pages/senator-detail/senator-detail";
 
 // import services
 // end import services
@@ -40,6 +41,7 @@ import { SenatorProvider } from "../providers/senator/senator";
     HomePage,
     LoginPage,
     SenatorListPage,
+    SenatorDetailPage,
     NotificationsPage,
     RegisterPage,
     SearchLocationPage,
@@ -67,6 +69,7 @@ import { SenatorProvider } from "../providers/senator/senator";
     HomePage,
     LoginPage,
     SenatorListPage,
+    SenatorDetailPage,
     NotificationsPage,
     RegisterPage,
     SearchLocationPage,

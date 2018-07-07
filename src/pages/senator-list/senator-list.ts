@@ -2,18 +2,14 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { SenatorProvider } from '../../providers/senator/senator';
+import { SenatorDetailPage } from '../senator-detail/senator-detail';
 
 @Component({
   selector: 'page-senator-list',
   templateUrl: 'senator-list.html'
 })
 export class SenatorListPage {
-  senators = [];
-  // state: {
-  //   initials: string,
-  //   name: string
-  // }
-
+  public senatorsProvider = [];
   public listSenatorByState = [];
   public stateList: Array<any> = [
     { name: 'Acre', initials: 'AC', senators: [] },
@@ -42,7 +38,7 @@ export class SenatorListPage {
     { name: 'Santa Catarina', initials: 'SC', senators: [] },
     { name: 'São Paulo', initials: 'SP', senators: [] },
     { name: 'Sergipe', initials: 'SE', senators: [] },
-    { name: 'Tocantins', initials: 'TO' }
+    { name: 'Tocantins', initials: 'TO', senators: [] }
   ]
 
   constructor(
@@ -63,42 +59,39 @@ export class SenatorListPage {
 
       this.senatorProvider.getSenators().subscribe((senator: any) => {
 
-        this.senators = senator.senators.parlamentares;
+        this.senatorsProvider = senator.senators.parlamentares;
 
         this.listSenatorByState = this.associateSenatorState();
       });
     });
-
 
   }
 
   public associateSenatorState() {
 
     this.stateList.forEach((element) => {
-      element.senators = this.senators.filter(index => index.identificacaoParlamentar.ufParlamentar == element.initials);
+      element.senators = this.senatorsProvider.filter(index => index.identificacaoParlamentar.ufParlamentar == element.initials);
 
     });
-    console.log("stateList", this.stateList);
+
     return this.stateList;
   }
-  
+
   public getSenatorByState(state) {
-    this.listSenatorByState = state;
-
-    if (typeof state === 'string') {
-      this.listSenatorByState = JSON.parse(state);
-
-    } else {
-      this.listSenatorByState = state;
-    }
+    this.listSenatorByState = [];
+    this.listSenatorByState.push(state);
 
     if (state != undefined) {
       this.senatorProvider.getSenatorByState(state.name, state.initials).subscribe((senator: any) => {
 
-        this.senators = senator.senators.parlamentares;
+        this.senatorsProvider = senator.senators.parlamentares;
       });
     }
 
   }
 
+  openDetail(senator) {
+    this.navCtrl.push(SenatorDetailPage, senator);
+    
+  }
 }

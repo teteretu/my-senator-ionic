@@ -25,6 +25,11 @@ ion-title {
     padding: 25px 10px 10px !important;
 }
 
+ion-item-sliding.item-wrapper:hover {
+    cursor: pointer !important;
+    filter: brightness(85%) !important;
+}
+
 .list-ios {
     margin: -1px 0 10px !important;
 }
