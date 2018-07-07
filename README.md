@@ -1,0 +1,3 @@
+# my-senator-ionic
+
+my-senator-ionic with 10 Pages, mock data, providers samples, Storage, Http and more...
