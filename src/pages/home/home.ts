@@ -5,7 +5,7 @@ import {Storage} from '@ionic/storage';
 import {NotificationsPage} from "../notifications/notifications";
 import {SettingsPage} from "../settings/settings";
 import {TripsPage} from "../trips/trips";
-import {SearchLocationPage} from "../search-location/search-location";
+import { SenatorListPage } from "../senator-list/senator-list";
 
 
 @Component({
@@ -37,14 +37,14 @@ export class HomePage {
     });
   }
 
-  // go to result page
-  doSearch() {
+  // go to quiz page
+  openQuiz() {
     this.nav.push(TripsPage);
   }
 
-  // choose place
-  choosePlace(from) {
-    this.nav.push(SearchLocationPage, from);
+  // senator info
+  openSenatorInfo() {
+    this.nav.push(SenatorListPage);
   }
 
   // to go account page

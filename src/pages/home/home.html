@@ -18,21 +18,20 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="animated fadeIn common-bg">
-
-  <ion-card no-margin margin-bottom class="full-width">
-    <ion-item tappable (click)="choosePlace('from')" class="border-bottom">
-      <ion-icon name="search" color="primary" item-left></ion-icon>
-      <span>{{ search.name }}</span>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="md-calendar" color="primary" item-left></ion-icon>
-      <ion-datetime class="no-pl" displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="search.date"></ion-datetime>
-    </ion-item>
+<ion-content class="card-background-page">
+  <ion-card tappable (click)="openQuiz()">
+    <img src="assets/img/question-quiz.jpg" />
+    <div class="card-title">Quiz</div>
+    <div class="card-subtitle">Toque para começar</div>
   </ion-card>
 
-  <button ion-button icon-start block no-margin color="primary" class="round" tappable (click)="doSearch()">
-    <ion-icon name="search"></ion-icon> Search
-  </button>
-
+  <ion-card tappable (click)="openSenatorInfo()">
+    <img src="assets/img/senado.jpg" />
+    <div class="card-title">Senadores</div>
+    <div class="card-subtitle">Toque para ver a lista de senadores</div>
+  </ion-card>
 </ion-content>
+
+<!-- <button ion-button icon-start block no-margin color="primary" class="round" tappable (click)="doSearch()">
+    <ion-icon name="md-clipboard"></ion-icon> Começar Quiz
+  </button> -->
