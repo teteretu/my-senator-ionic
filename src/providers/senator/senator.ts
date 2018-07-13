@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class SenatorProvider {
   apiKey = '1e4a0bdb251c64e4';
-  url: string = "http://localhost:8080/api";
+  url: string = "http://192.168.10.102:8080/api";
   queryNotFound: string;
 
   constructor(public http: HttpClient) {
@@ -20,11 +20,21 @@ export class SenatorProvider {
   }
 
   getSenators() {
-    return this.http.get( this.url + "/senators/all").map(res => res);
+    try {
+      return this.http.get( this.url + "/senators/all").map(res => res);
+    } catch (error) {
+      console.error();
+    }
+    
   }
 
   getSenatorByState(state, initials) {
-    return this.http.get(this.url + state + '/' + initials + '.json').map(res => res);
+    try {
+      return this.http.get(this.url + state + '/' + initials + '.json').map(res => res);
+    } catch (error) {
+      console.error();
+    }
+    
   }
 
 }
