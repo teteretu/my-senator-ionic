@@ -2,10 +2,11 @@ import {Component} from "@angular/core";
 import {NavController, PopoverController} from "ionic-angular";
 import {Storage} from '@ionic/storage';
 
-import {NotificationsPage} from "../notifications/notifications";
-import {SettingsPage} from "../settings/settings";
-import {TripsPage} from "../trips/trips";
+import { NotificationsPage } from "../notifications/notifications";
+import { SettingsPage } from "../settings/settings";
 import { SenatorListPage } from "../senator-list/senator-list";
+import { QuizPage } from "../quiz/quiz";
+import { SenatorInfoPage } from "../senator-info/senator-info";
 
 
 @Component({
@@ -24,27 +25,26 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-    // this.search.pickup = "Rio de Janeiro, Brazil";
-    // this.search.dropOff = "Same as pickup";
     this.storage.get('pickup').then((val) => {
-      if (val === null) {
-        this.search.name = "Rio de Janeiro, Brazil"
-      } else {
-        this.search.name = val;
-      }
+      
     }).catch((err) => {
       console.log(err)
     });
   }
 
-  // go to quiz page
-  openQuiz() {
-    this.nav.push(TripsPage);
+  // go to QuizPage page
+  openQuizPage() {
+    this.nav.push(QuizPage);
   }
 
-  // senator info
-  openSenatorInfo() {
+  // senator List
+  openSenatorList() {
     this.nav.push(SenatorListPage);
+  }
+  
+  // senator Info
+  openSenatorInfo() {
+    this.nav.push(SenatorInfoPage);
   }
 
   // to go account page

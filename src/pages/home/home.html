@@ -19,19 +19,25 @@
 </ion-header>
 
 <ion-content class="card-background-page">
-  <ion-card tappable (click)="openQuiz()">
+  <ion-card tappable (click)="openQuizPage()">
     <img src="assets/img/question-quiz.jpg" />
-    <div class="card-title">Quiz</div>
+    <div class="card-title">QuizPage</div>
     <div class="card-subtitle">Toque para começar</div>
   </ion-card>
 
-  <ion-card tappable (click)="openSenatorInfo()">
+  <ion-card tappable (click)="openSenatorList()">
     <img src="assets/img/senado.jpg" />
     <div class="card-title">Senadores</div>
     <div class="card-subtitle">Toque para ver a lista de senadores</div>
   </ion-card>
+
+  <ion-card tappable (click)="openSenatorInfo()">
+    <img src="assets/img/unique-senator.jpg" />
+    <div class="card-title">Papel do Senador</div>
+    <div class="card-subtitle">Toque para ver uma breve descrição do papel dos Senadores</div>
+  </ion-card>
 </ion-content>
 
 <!-- <button ion-button icon-start block no-margin color="primary" class="round" tappable (click)="doSearch()">
-    <ion-icon name="md-clipboard"></ion-icon> Começar Quiz
+    <ion-icon name="md-clipboard"></ion-icon> Começar QuizPage
   </button> -->

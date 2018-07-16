@@ -10,10 +10,8 @@ import { HttpClient } from '@angular/common/http';
 */
 @Injectable()
 export class SenatorProvider {
-  apiKey = '1e4a0bdb251c64e4';
   url: string = "http://192.168.10.102:8080/api";
-  queryNotFound: string;
-
+  
   constructor(public http: HttpClient) {
     console.log('Hello SenatorProvider Provider');
     // this.url = 'http://api.wunderground.com/api/'+ this.apiKey +'/conditions/q/'

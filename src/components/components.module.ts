@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { SenatorDetailComponent } from './senator-detail/senator-detail';
 @NgModule({
-	declarations: [SenatorDetailComponent],
+	declarations: [],
 	imports: [],
-	exports: [SenatorDetailComponent]
+	exports: []
 })
 export class ComponentsModule {}
