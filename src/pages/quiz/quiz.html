@@ -9,11 +9,22 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>quiz</ion-title>
+    <ion-title>Seleção de Categorias</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-  Start quiz...
+  <p class="indication">Selecione as categorias que você mais se identifica!!</p>
+  <ion-list *ngFor = "let category of categories">
+    <ion-list-header>
+      {{category.title}}
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>{{category.item}} </ion-label>
+      <ion-checkbox value="category.codigo" (click)="updateCheckedOptions(category, $event)"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <button ion-button block (click)="calculatePreference()">Calcular preferência</button>
 </ion-content>

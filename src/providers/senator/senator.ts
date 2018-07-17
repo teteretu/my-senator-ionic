@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 */
 @Injectable()
 export class SenatorProvider {
-  url: string = "http://192.168.10.102:8080/api";
+  url: string = "http://192.168.10.103:8080/api";
   
   constructor(public http: HttpClient) {
     console.log('Hello SenatorProvider Provider');

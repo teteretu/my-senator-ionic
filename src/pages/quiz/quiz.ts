@@ -16,13 +16,44 @@ import { CateroriesProvider } from '../../providers/caterories/caterories';
 export class QuizPage {
   //JSON com todas as categorias
   public categories;
+  cbChecked = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public categoriesProvider: CateroriesProvider) {
   }
 
   ionViewDidLoad() {
-    this.categories = this.categoriesProvider.getAllCategories();
+    // this.categories = this.categoriesProvider.getAllCategories();
+
+    let item = "item1";
+    let title = "Categoria";
+    let codigo = 1;
+    let category = {title, item, codigo};
+
+    this.categories = [ category, category ];
+  }
+
+  updateCheckedOptions(category, event) {
+    var cbIdx = this.categories.indexOf(category);
+
+    if(event.target.checked) {
+        if(cbIdx < 0 ){
+             this.cbChecked.push(category);
+           console.log(category);
+        }
+
+    } else {
+        if(cbIdx >= 0 ){
+           this.cbChecked.splice(cbIdx,1);
+            console.log(cbIdx);
+        }
+
+    }
+  }
+
+  calculatePreference() {
+    console.log("itens checados: ", this.cbChecked);
+    console.log("categories", this.categories);
   }
 
 }
