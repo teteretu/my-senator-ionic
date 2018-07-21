@@ -15,15 +15,15 @@
 
 
 <ion-content padding>
-  <p class="indication">Selecione as categorias que você mais se identifica!!</p>
+  <p class="indication">Quais categorias os políticos devem defender para o Brasil?</p>
   <ion-list *ngFor = "let category of categories">
-    <ion-list-header>
+    <!-- <ion-list-header>
       {{category.title}}
-    </ion-list-header>
+    </ion-list-header> -->
 
     <ion-item>
-      <ion-label>{{category.item}} </ion-label>
-      <ion-checkbox value="category.codigo" (click)="updateCheckedOptions(category, $event)"></ion-checkbox>
+      <ion-label>{{category.categoria}} </ion-label>
+      <ion-checkbox [(ngModel)]="category.checked" ></ion-checkbox>
     </ion-item>
   </ion-list>
   <button ion-button block (click)="calculatePreference()">Calcular preferência</button>

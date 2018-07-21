@@ -16,44 +16,43 @@ import { CateroriesProvider } from '../../providers/caterories/caterories';
 export class QuizPage {
   //JSON com todas as categorias
   public categories;
-  cbChecked = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public categoriesProvider: CateroriesProvider) {
   }
 
   ionViewDidLoad() {
-    // this.categories = this.categoriesProvider.getAllCategories();
+    this.categoriesProvider.getAllCategories().subscribe((category: any) => {
+      category.categories.forEach(element => {
+        element.checked = false;
+      });
+      
+      this.categories = category.categories;
+      console.log(this.categories);
+    });
 
-    let item = "item1";
-    let title = "Categoria";
-    let codigo = 1;
-    let category = {title, item, codigo};
+    let title = "Categoria1";
+    let item = ["item1"];
+    let checked = false;
+    let category = {title, item, checked};
 
-    this.categories = [ category, category ];
-  }
+    title = "Categoria2";
+    item = ["item2"];
+    let category2 = {title, item, checked}
 
-  updateCheckedOptions(category, event) {
-    var cbIdx = this.categories.indexOf(category);
-
-    if(event.target.checked) {
-        if(cbIdx < 0 ){
-             this.cbChecked.push(category);
-           console.log(category);
-        }
-
-    } else {
-        if(cbIdx >= 0 ){
-           this.cbChecked.splice(cbIdx,1);
-            console.log(cbIdx);
-        }
-
-    }
+    this.categories = [ category, category2 ];
   }
 
   calculatePreference() {
-    console.log("itens checados: ", this.cbChecked);
-    console.log("categories", this.categories);
+    let choices = this.categories.filter(item => item.checked);
+    console.log("categories", choices);
+
+    if (choices.length >= 0)
+      this.categoriesProvider.calculatePerfil(choices).subscribe((senators: any) => {
+        console.log(senators);
+    
+      });
+
   }
 
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { HttpClient } from '@angular/common/http';
+import { URL_API } from '../../consts/consts';
 
 /*
   Generated class for the SenatorProvider provider.
@@ -10,16 +11,13 @@ import { HttpClient } from '@angular/common/http';
 */
 @Injectable()
 export class SenatorProvider {
-  url: string = "http://192.168.10.103:8080/api";
   
   constructor(public http: HttpClient) {
-    console.log('Hello SenatorProvider Provider');
-    // this.url = 'http://api.wunderground.com/api/'+ this.apiKey +'/conditions/q/'
   }
 
   getSenators() {
     try {
-      return this.http.get( this.url + "/senators/all").map(res => res);
+      return this.http.get( URL_API + "/senators/all").map(res => res);
     } catch (error) {
       console.error();
     }
@@ -28,7 +26,7 @@ export class SenatorProvider {
 
   getSenatorByState(state, initials) {
     try {
-      return this.http.get(this.url + state + '/' + initials + '.json').map(res => res);
+      return this.http.get( URL_API + state + '/' + initials + '.json').map(res => res);
     } catch (error) {
       console.error();
     }

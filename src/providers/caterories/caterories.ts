@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-import { HttpClient } from '../../../node_modules/@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { URL_API } from '../../consts/consts';
 
 /*
   Generated class for the CateroriesProvider provider.
@@ -10,17 +11,26 @@ import { HttpClient } from '../../../node_modules/@angular/common/http';
 */
 @Injectable()
 export class CateroriesProvider {
-  url: string = "http://192.168.10.102:8080/api";
   
   constructor(public http: HttpClient) {
   }
 
   getAllCategories() {
     try {
-      return this.http.get( this.url + "/categories/all").map(res => res);
+      console.log("categorias all");
+      return this.http.get( URL_API + "/categories/all").map(res => res);
     } catch (error) {
       console.error();
     }
     
+  }
+  
+  calculatePerfil(categories) {
+    try {
+      console.log("categories", categories);
+      return this.http.post( URL_API + "/categories/calculate", categories).map(res => res);
+    } catch (error) {
+      console.error();
+    }
   }
 }
