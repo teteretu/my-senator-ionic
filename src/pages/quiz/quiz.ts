@@ -23,38 +23,29 @@ export class QuizPage {
   }
 
   ionViewDidLoad() {
+    
     this.categoriesProvider.getAllCategories().subscribe((category: any) => {
       category.categories.forEach(element => {
         element.checked = false;
       });
       
       this.categories = category.categories;
-      console.log(this.categories);
     });
 
-    // let title = "Categoria1";
-    // let item = ["item1"];
-    // let checked = false;
-    // let category = {title, item, checked};
-
-    // title = "Categoria2";
-    // item = ["item2"];
-    // let category2 = {title, item, checked}
-
-    // this.categories = [ category, category2 ];
   }
 
   calculatePreference() {
     let choices = this.categories.filter(item => item.checked);
 
-    if (choices.length >= 0)
+    if (choices.length >= 0) {
       this.categoriesProvider.calculatePerfil(choices).subscribe((senators: any) => {
-        console.log(senators);
+        
         if (senators != null) {
-          this.nav.setRoot(SenatorListPage);
+          this.nav.setRoot(SenatorListPage, {senators});
         }
     
       });
+    }
 
   }
 
