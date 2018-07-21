@@ -17,7 +17,6 @@ export class CateroriesProvider {
 
   getAllCategories() {
     try {
-      console.log("categorias all");
       return this.http.get( URL_API + "/categories/all").map(res => res);
     } catch (error) {
       console.error();
@@ -27,7 +26,6 @@ export class CateroriesProvider {
   
   calculatePerfil(categories) {
     try {
-      console.log("categories", categories);
       return this.http.post( URL_API + "/categories/calculate", categories).map(res => res);
     } catch (error) {
       console.error();
