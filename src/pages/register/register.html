@@ -6,16 +6,16 @@
     <div padding text-center>
       <div class="logo"></div>
       <h2 ion-text class="text-primary">
-        <strong>Ionic 3</strong> Start Theme
+        <strong>Meu Senador</strong>
       </h2>
     </div>
-
+ 
     <!-- Login form -->
     <form class="list-form">
       <ion-item>
         <ion-label floating>
           <ion-icon name="person" item-start class="text-primary"></ion-icon>
-          Full Name
+          Nome Completo
         </ion-label>
         <ion-input type="text"></ion-input>
       </ion-item>
@@ -31,7 +31,7 @@
       <ion-item>
         <ion-label floating>
           <ion-icon name="lock" item-start class="text-primary"></ion-icon>
-          Password
+          Senha
         </ion-label>
         <ion-input type="password"></ion-input>
       </ion-item>
@@ -39,26 +39,16 @@
 
     <div margin-top>
       <button ion-button block color="dark" tappable (click)="register()">
-        SIGN UP
+        Cadastre-se
       </button>
 
-      <p text-center ion-text color="secondary">Or Sign Up with:</p>
+      <p text-center ion-text color="secondary">Ou Cadastre-se Com:</p>
 
       <ion-grid>
         <ion-row>
           <ion-col col-4>
-            <button ion-button icon-only block class="btn-facebook">
+            <button ion-button icon-only full class="btn-facebook">
               <ion-icon name="logo-facebook"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col col-4>
-            <button ion-button icon-only block class="btn-twitter">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col col-4>
-            <button ion-button icon-only block class="btn-gplus">
-              <ion-icon name="logo-googleplus"></ion-icon>
             </button>
           </ion-col>
         </ion-row>
@@ -67,7 +57,7 @@
 
     <!-- Other links -->
     <div text-center margin-top>
-      <span ion-text color="primary" tappable (click)="login()">I have an account</span>
+      <span ion-text color="primary" tappable (click)="login()">Já tenho uma conta</span>
     </div>
 
   </div>

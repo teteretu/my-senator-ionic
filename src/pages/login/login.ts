@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {NavController, AlertController, ToastController, MenuController} from "ionic-angular";
 import {HomePage} from "../home/home";
 import {RegisterPage} from "../register/register";
+import { LoginProvider } from "../../providers/login/login";
 
 @Component({
   selector: 'page-login',
@@ -9,7 +10,14 @@ import {RegisterPage} from "../register/register";
 })
 export class LoginPage {
 
-  constructor(public nav: NavController, public forgotCtrl: AlertController, public menu: MenuController, public toastCtrl: ToastController) {
+  email = "";
+  password = "";
+
+  constructor(public nav: NavController,
+      public alertController: AlertController,
+      public menu: MenuController,
+      public toastCtrl: ToastController,
+      public loginProvider: LoginProvider) {
     this.menu.swipeEnable(false);
   }
 
@@ -20,11 +28,14 @@ export class LoginPage {
 
   // login and go to home page
   login() {
-    this.nav.setRoot(HomePage);
+
+    if (this.checkFields()) {
+      this.nav.setRoot(HomePage);
+    }
   }
 
   forgotPass() {
-    let forgot = this.forgotCtrl.create({
+    let forgot = this.alertController.create({
       title: 'Forgot Password?',
       message: "Enter you email address to send a reset link password.",
       inputs: [
@@ -59,6 +70,32 @@ export class LoginPage {
       ]
     });
     forgot.present();
+  }
+
+  checkFields() {
+    if (this.email == "" || this.email == undefined) {
+      const alert = this.alertController.create({
+        title: 'Atenção!',
+        subTitle: 'Campo de Email não foi preenchido!',
+        buttons: ['OK']
+      });
+      alert.present();
+      return false;
+    }else if (this.password == "" || this.password == undefined || this.password.length > 8) {
+      const alert = this.alertController.create({
+        title: 'Atenção!',
+        subTitle: 'Campo de Senha não foi preenchido!',
+        buttons: ['OK']
+      });
+      alert.present();
+      return false;
+    }else {
+      let user = this.loginProvider.login(this.email, this.password);
+      if (user != null && user) {
+        return true;
+      }
+    }
+
   }
 
 }

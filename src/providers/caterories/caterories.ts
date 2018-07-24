@@ -20,6 +20,7 @@ export class CateroriesProvider {
       return this.http.get( URL_API + "/categories/all").map(res => res);
     } catch (error) {
       console.error();
+      return null;
     }
     
   }
@@ -29,6 +30,7 @@ export class CateroriesProvider {
       return this.http.post( URL_API + "/categories/calculate", categories).map(res => res);
     } catch (error) {
       console.error();
+      return null;
     }
   }
 }

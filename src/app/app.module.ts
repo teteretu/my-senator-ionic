@@ -21,6 +21,7 @@ import { SenatorDetailPage } from "../pages/senator-detail/senator-detail";
 import { CateroriesProvider } from '../providers/caterories/caterories';
 import { QuizPage } from "../pages/quiz/quiz";
 import { SenatorInfoPage } from "../pages/senator-info/senator-info";
+import { LoginProvider } from '../providers/login/login';
 
 // import services
 // end import services
@@ -73,7 +74,8 @@ import { SenatorInfoPage } from "../pages/senator-info/senator-info";
     SplashScreen,
     Keyboard,
     SenatorProvider,
-    CateroriesProvider
+    CateroriesProvider,
+    LoginProvider
   ]
 })
 
