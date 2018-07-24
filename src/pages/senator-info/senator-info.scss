@@ -1,3 +1,19 @@
 page-senator-info {
+    background-color: rgb(249,241,228);
 
+    div.info-content {
+        margin: 10px auto;
+        font-size: 18px;
+        font-family: "Athelas";
+        color: black;
+    }
+
+    div.footer {
+        color: black;
+        font-size: 16px;
+        font-family: "Athelas";
+        a {
+            text-decoration: none;
+        }
+    }
 }

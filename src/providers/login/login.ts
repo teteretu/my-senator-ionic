@@ -18,10 +18,10 @@ export class LoginProvider {
   login(email, password) {
 
     try {
-      let login = {
-        email,
-        password
-      }
+      // let login = {
+      //   email,
+      //   password
+      // }
       // return this.http.post( URL_API + "/login/log", login).map(res => res);
       return true;
     } catch (error) {
