@@ -19,7 +19,7 @@ export class CateroriesProvider {
     try {
       return this.http.get( URL_API + "/categories/all").map(res => res);
     } catch (error) {
-      console.error();
+      console.error(error);
       return null;
     }
     
@@ -29,7 +29,7 @@ export class CateroriesProvider {
     try {
       return this.http.post( URL_API + "/categories/calculate", categories).map(res => res);
     } catch (error) {
-      console.error();
+      console.error(error);
       return null;
     }
   }

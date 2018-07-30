@@ -19,7 +19,7 @@ export class SenatorProvider {
     try {
       return this.http.get( URL_API + "/senators/all").map(res => res);
     } catch (error) {
-      console.error();
+      console.error(error);
     }
     
   }
@@ -28,7 +28,7 @@ export class SenatorProvider {
     try {
       return this.http.get( URL_API + state + '/' + initials + '.json').map(res => res);
     } catch (error) {
-      console.error();
+      console.error(error);
     }
     
   }

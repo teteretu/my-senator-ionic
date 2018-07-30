@@ -17,7 +17,7 @@
           <ion-icon name="mail" item-start class="text-primary"></ion-icon>
           Email
         </ion-label>
-        <ion-input [(ngModel)]="email" name="email" type="email"></ion-input>
+        <ion-input [(ngModel)]="loginForm.email" name="loginForm.email" type="email" ></ion-input>
       </ion-item>
 
       <ion-item>
@@ -25,7 +25,7 @@
           <ion-icon name="lock" item-start class="text-primary"></ion-icon>
           Senha
         </ion-label>
-        <ion-input [(ngModel)]="password" name="password" type="password"></ion-input>
+        <ion-input [(ngModel)]="loginForm.password" name="loginForm.password" type="password"></ion-input>
       </ion-item>
     </form>
 
@@ -34,12 +34,12 @@
     </p>
 
     <div>
-      <button ion-button icon-start block color="dark" tappable (click)="login()">
+      <button ion-button icon-start block color="dark" tappable (click)="signIn()">
         <ion-icon name="log-in"></ion-icon>
         Entrar
       </button>
 
-      <p text-center ion-text color="secondary">Ou entre com:</p>
+      <!-- <p text-center ion-text color="secondary">Ou entre com:</p>
 
       <ion-grid>
         <ion-row>
@@ -47,7 +47,7 @@
             <ion-icon name="logo-facebook"></ion-icon>
           </button>
         </ion-row>
-      </ion-grid>
+      </ion-grid> -->
 
     </div>
 

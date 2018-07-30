@@ -8,7 +8,7 @@
       <h2 ion-text class="text-primary">
         <strong>Meu Senador</strong>
       </h2>
-    </div>
+    </div> 
  
     <!-- Login form -->
     <form class="list-form">
@@ -17,7 +17,7 @@
           <ion-icon name="person" item-start class="text-primary"></ion-icon>
           Nome Completo
         </ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input [(ngModel)]="registerForm.name" name="name" type="text"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -25,7 +25,7 @@
           <ion-icon name="mail" item-start class="text-primary"></ion-icon>
           Email
         </ion-label>
-        <ion-input type="email"></ion-input>
+        <ion-input [(ngModel)]="registerForm.email" name="email" type="email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -33,16 +33,16 @@
           <ion-icon name="lock" item-start class="text-primary"></ion-icon>
           Senha
         </ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input [(ngModel)]="registerForm.password" name="password" type="password"></ion-input>
       </ion-item>
     </form>
 
     <div margin-top>
-      <button ion-button block color="dark" tappable (click)="register()">
+      <button ion-button block color="dark" tappable (click)="signUp()">
         Cadastre-se
       </button>
 
-      <p text-center ion-text color="secondary">Ou Cadastre-se Com:</p>
+      <!-- <p text-center ion-text color="secondary">Ou Cadastre-se Com:</p>
 
       <ion-grid>
         <ion-row>
@@ -52,7 +52,7 @@
             </button>
           </ion-col>
         </ion-row>
-      </ion-grid>
+      </ion-grid> -->
     </div>
 
     <!-- Other links -->

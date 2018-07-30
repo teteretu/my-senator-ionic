@@ -13,7 +13,6 @@ import {MyApp} from "./app.component";
 import {SettingsPage} from "../pages/settings/settings";
 import {HomePage} from "../pages/home/home";
 import {LoginPage} from "../pages/login/login";
-import {NotificationsPage} from "../pages/notifications/notifications";
 import {RegisterPage} from "../pages/register/register";
 import {SenatorListPage} from "../pages/senator-list/senator-list";
 import { SenatorProvider } from "../providers/senator/senator";
@@ -21,7 +20,7 @@ import { SenatorDetailPage } from "../pages/senator-detail/senator-detail";
 import { CateroriesProvider } from '../providers/caterories/caterories';
 import { QuizPage } from "../pages/quiz/quiz";
 import { SenatorInfoPage } from "../pages/senator-info/senator-info";
-import { LoginProvider } from '../providers/login/login';
+import { UserProvider } from "../providers/user/user";
 
 // import services
 // end import services
@@ -38,7 +37,6 @@ import { LoginProvider } from '../providers/login/login';
     LoginPage,
     SenatorListPage,
     SenatorDetailPage,
-    NotificationsPage,
     RegisterPage,
     QuizPage,
     SenatorInfoPage
@@ -64,7 +62,6 @@ import { LoginProvider } from '../providers/login/login';
     LoginPage,
     SenatorListPage,
     SenatorDetailPage,
-    NotificationsPage,
     RegisterPage,
     QuizPage,
     SenatorInfoPage
@@ -75,7 +72,7 @@ import { LoginProvider } from '../providers/login/login';
     Keyboard,
     SenatorProvider,
     CateroriesProvider,
-    LoginProvider
+    UserProvider
   ]
 })
 

@@ -1,8 +1,8 @@
-import {Component} from "@angular/core";
-import {NavController, AlertController, ToastController, MenuController} from "ionic-angular";
-import {HomePage} from "../home/home";
-import {RegisterPage} from "../register/register";
-import { LoginProvider } from "../../providers/login/login";
+import { Component } from "@angular/core";
+import { NavController, AlertController, ToastController, MenuController } from "ionic-angular";
+import { HomePage } from "../home/home";
+import { RegisterPage } from "../register/register";
+import { UserProvider } from "../../providers/user/user";
 
 @Component({
   selector: 'page-login',
@@ -10,14 +10,16 @@ import { LoginProvider } from "../../providers/login/login";
 })
 export class LoginPage {
 
-  email = "";
-  password = "";
+  loginForm = {
+    email: "",
+    password: ""
+  }
 
   constructor(public nav: NavController,
-      public alertController: AlertController,
-      public menu: MenuController,
-      public toastCtrl: ToastController,
-      public loginProvider: LoginProvider) {
+    public alertController: AlertController,
+    public menu: MenuController,
+    public toastCtrl: ToastController,
+    public userProvider: UserProvider) {
     this.menu.swipeEnable(false);
   }
 
@@ -27,17 +29,36 @@ export class LoginPage {
   }
 
   // login and go to home page
-  login() {
+  signIn() {
 
     if (this.checkFields()) {
-      this.nav.setRoot(HomePage);
+
+      this.userProvider.sign(this.loginForm).subscribe((responseBack: any) => {
+
+        let response = responseBack;
+
+        if (response != null && response.confirmLogin && response != "") {
+          this.nav.setRoot(HomePage);
+
+        } else {
+          const alert = this.alertController.create({
+            title: 'Atenção!',
+            subTitle: 'Usuário ou Senha inválidos!',
+            buttons: ['OK']
+          });
+          alert.present();
+
+        }
+
+      });
+    
     }
   }
 
   forgotPass() {
     let forgot = this.alertController.create({
-      title: 'Forgot Password?',
-      message: "Enter you email address to send a reset link password.",
+      title: 'Esqueceu sua senha?',
+      message: "Digite seu email e receba uma nova senha.",
       inputs: [
         {
           name: 'email',
@@ -47,17 +68,17 @@ export class LoginPage {
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           handler: data => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Send',
+          text: 'Confirmar',
           handler: data => {
             console.log('Send clicked');
             let toast = this.toastCtrl.create({
-              message: 'Email was sended successfully',
+              message: 'Email enviado com sucesso',
               duration: 3000,
               position: 'top',
               cssClass: 'dark-trans',
@@ -73,7 +94,8 @@ export class LoginPage {
   }
 
   checkFields() {
-    if (this.email == "" || this.email == undefined) {
+
+    if (this.loginForm.email == "" || this.loginForm.email == undefined) {
       const alert = this.alertController.create({
         title: 'Atenção!',
         subTitle: 'Campo de Email não foi preenchido!',
@@ -81,7 +103,7 @@ export class LoginPage {
       });
       alert.present();
       return false;
-    }else if (this.password == "" || this.password == undefined || this.password.length > 8) {
+    } else if (this.loginForm.password == "" || this.loginForm.password == undefined || this.loginForm.password.length <= 8) {
       const alert = this.alertController.create({
         title: 'Atenção!',
         subTitle: 'Campo de Senha não foi preenchido!',
@@ -89,8 +111,9 @@ export class LoginPage {
       });
       alert.present();
       return false;
-    }else {
-      let user = this.loginProvider.login(this.email, this.password);
+    } else {
+
+      let user = this.userProvider.sign(this.loginForm);
       if (user != null && user) {
         return true;
       }

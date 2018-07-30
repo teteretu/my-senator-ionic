@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { HttpClient } from '../../../node_modules/@angular/common/http';
-// import { URL_API } from '../../consts/consts';
+import { URL_API } from '../../consts/consts';
 
 /*
   Generated class for the LoginProvider provider.
@@ -10,22 +10,27 @@ import { HttpClient } from '../../../node_modules/@angular/common/http';
   and Angular DI.
 */
 @Injectable()
-export class LoginProvider {
+export class UserProvider {
 
   constructor(public http: HttpClient) {
   }
 
-  login(email, password) {
+  signUp(registerForm) {
 
     try {
-      // let login = {
-      //   email,
-      //   password
-      // }
-      // return this.http.post( URL_API + "/login/log", login).map(res => res);
-      return true;
+      return this.http.post( URL_API + "/user/signUp", registerForm).map(res => res);
     } catch (error) {
-      console.error();
+      console.error(error);
+      return null;
+    }
+  }
+
+  sign(loginForm) {
+
+    try {
+      return this.http.post( URL_API + "/user/sign", loginForm).map(res => res);
+    } catch (error) {
+      console.error(error);
       return null;
     }
   }
