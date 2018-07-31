@@ -15,11 +15,8 @@
 
 
 <ion-content padding>
-  <p class="indication">Quais categorias os políticos devem defender para o Brasil?</p>
-  <ion-list *ngFor = "let category of categories">
-    <!-- <ion-list-header>
-      {{category.title}}
-    </ion-list-header> -->
+  <p class="indication">O que é mais relevante para a política?</p>
+  <ion-list *ngFor = "let category of filteredCategories">
 
     <ion-item>
       <ion-label>{{category.categoria}} </ion-label>

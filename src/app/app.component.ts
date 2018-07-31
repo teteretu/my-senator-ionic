@@ -8,6 +8,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { HomePage } from "../pages/home/home";
 import { LoginPage } from "../pages/login/login";
 import { SenatorListPage } from "../pages/senator-list/senator-list";
+import { QuizPage } from "../pages/quiz/quiz";
 
 export interface MenuItem {
     title: string;
@@ -36,7 +37,8 @@ export class MyApp {
 
     this.appMenuItems = [
       {title: 'Home', component: HomePage, icon: 'home'},
-      {title: 'Lista de Senadores', component: SenatorListPage, icon: 'partly-sunny'}
+      {title: 'Questionário Social', component: QuizPage, icon: 'ios-create'},
+      {title: 'Lista de Senadores', component: SenatorListPage, icon: 'md-list-box'}
     ];
   }
 

@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { NavController, AlertController, ToastController, MenuController } from "ionic-angular";
-import { HomePage } from "../home/home";
 import { RegisterPage } from "../register/register";
 import { UserProvider } from "../../providers/user/user";
+import { QuizPage } from "../quiz/quiz";
 
 @Component({
   selector: 'page-login',
@@ -38,7 +38,7 @@ export class LoginPage {
         let response = responseBack;
 
         if (response != null && response.confirmLogin && response != "") {
-          this.nav.setRoot(HomePage);
+          this.nav.setRoot(QuizPage);
 
         } else {
           const alert = this.alertController.create({
