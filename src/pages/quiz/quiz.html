@@ -16,12 +16,22 @@
 
 <ion-content padding>
   <p class="indication">O que é mais relevante para a política?</p>
-  <ion-list *ngFor = "let category of filteredCategories">
+  <ion-list *ngFor="let category of filteredCategories">
 
     <ion-item>
       <ion-label>{{category.categoria}} </ion-label>
-      <ion-checkbox [(ngModel)]="category.checked" ></ion-checkbox>
+      <ion-checkbox [(ngModel)]="category.checked"></ion-checkbox>
     </ion-item>
   </ion-list>
-  <button ion-button block (click)="calculatePreference()">Calcular preferência</button>
+  <p>
+    <button ion-button round *ngIf="treeTimes <= categories?.length-showIn && treeTimes > showIn" icon-start (click)="back()">
+      <ion-icon name="ios-arrow-dropleft-outline"></ion-icon>
+      Voltar
+    </button>
+    <button ion-button round *ngIf="treeTimes <= categories?.length-showIn" icon-end class="right-btn" (click)="calculatePreference()">
+      Próximo
+      <ion-icon name="ios-arrow-dropright-outline"></ion-icon>
+    </button>
+  </p>
+  <button ion-button block (click)="calculatePreference()" *ngIf="treeTimes > categories?.length-showIn">Calcular preferência</button>
 </ion-content>

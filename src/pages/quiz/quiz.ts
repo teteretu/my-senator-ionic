@@ -20,7 +20,10 @@ export class QuizPage {
   filteredCategories = [];
   choices = [];
 
-  treeTimes = 2;
+  // mostra categorias de x em x
+  showIn = 3;
+
+  treeTimes = 3;
 
   constructor(public nav: NavController,
     public navParams: NavParams,
@@ -39,47 +42,72 @@ export class QuizPage {
     });
     this.categories = [{ categoria: "Saúde", checked: false }, { categoria: "Transporte", checked: false }, { categoria: "Trabalho", checked: false },
     { categoria: "Segurança", checked: false }, { categoria: "Educação", checked: false }, { categoria: "Infraestrutura", checked: false },
-    { categoria: "cat1", checked: false }, { categoria: "cat2", checked: false }, { categoria: "cat3", checked: false }];
+    { categoria: "cat1", checked: false }, { categoria: "cat2", checked: false }, { categoria: "cat3", checked: false },
+    { categoria: "cat3", checked: false }, { categoria: "cat4", checked: false }, { categoria: "cat4", checked: false }];
 
     if (this.categories.length > 0) {
-      
-      this.categories.forEach((element) => {
-        this.filteredCategories.push(element);
-      });
-      this.filteredCategories = this.filteredCategories.slice(0, 3);
-      console.log(this.filteredCategories);
+
+      this.filteredCategories = this.categories.slice(0, this.showIn);
+      console.log(this.categories);
     }
 
   }
 
+  back() {
+    this.filteredCategories = this.categories;
+
+    this.filteredCategories = this.filteredCategories.slice(this.treeTimes - (2 * this.showIn), this.treeTimes - this.showIn);
+
+    this.treeTimes -= 3;
+  }
 
   calculatePreference() {
-    
+
     let filtered = this.filteredCategories.filter(item => item.checked);
+
+    this.categories.forEach((category) => {
+      if (filtered.find(element => element.categoria == category.categoria) != undefined)
+        category.checked = true;
+    });
+
+    this.choices = [];
     filtered.forEach((element) => {
       this.choices.push(element);
     });
 
     if (this.choices.length > 0) {
-      if (this.treeTimes > 3) {
-        
-        this.categoriesProvider.calculatePerfil(this.choices).subscribe((senators: any) => {
+      if (this.treeTimes >= this.categories.length) {
+        this.choices = this.categories.filter(item => item.checked)
 
-          if (senators != null) {
-            this.nav.setRoot(SenatorListPage, { senators });
-            return;
-          }
+        if (this.choices.length > 0) {
+          this.categoriesProvider.calculatePerfil(this.choices).subscribe((senators: any) => {
 
-        });
-        this.nav.setRoot(SenatorListPage);
+            if (senators != null) {
+              this.nav.setRoot(SenatorListPage, { senators });
+              return;
+            }
 
+          });
+          this.nav.setRoot(SenatorListPage);
+        } else {
+          const alert = this.alertCtrl.create({
+            title: 'Atenção!',
+            subTitle: 'Porfavor, selecione uma categoria!',
+            buttons: ['OK']
+          });
+          alert.present();
+        }
       } else {
+        this.filteredCategories = [];
         this.categories.forEach((element) => {
           this.filteredCategories.push(element);
         });
-        this.filteredCategories = this.filteredCategories.slice(this.treeTimes * 3, (this.treeTimes * 3) + 3);
-        
-        this.treeTimes++;
+        console.log(this.treeTimes, this.treeTimes + this.showIn);
+        console.log(this.filteredCategories);
+        console.log(this.filteredCategories.slice(this.treeTimes, this.treeTimes + this.showIn));
+        this.filteredCategories = this.filteredCategories.slice(this.treeTimes, this.treeTimes + this.showIn);
+
+        this.treeTimes += this.showIn;
       }
     } else {
       const alert = this.alertCtrl.create({
