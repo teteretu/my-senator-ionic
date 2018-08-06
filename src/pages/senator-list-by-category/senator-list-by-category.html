@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-navbar color="primary"> 
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Lista de Senadores</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding class="common-bg">
+    <ion-card class="full-width" no-margin margin-bottom>
+      <ion-card-content no-padding>
+  
+        <ion-item>
+          <ion-label class="text-1x bold">Filtre a categoria</ion-label>
+          <ion-select [(ngModel)]="category" (ionChange)="getSenatorByCategory(category)">
+            <ion-option *ngFor="let category of categoriesList" [value]="category">{{ category.name }}</ion-option>
+          </ion-select>
+        </ion-item>
+  
+      </ion-card-content>
+    </ion-card>
+  
+    <ion-list *ngFor="let category of listSenatorByCaregory">
+      <div *ngIf="category?.categories?.length > 0">
+        <ion-list-header>
+          <div class="block">{{ category?.name }}</div>
+          <div class="right-initials">{{ category?.initials }}</div>
+        </ion-list-header>
+        
+        <div *ngFor="let senator of category?.categories">
+          <ion-item-sliding (click)="openDetail(senator)">
+            <ion-item>
+              <ion-avatar item-start>
+                <img [src]="senator.codigoParlamentar.urlFotoParlamentar">
+              </ion-avatar>
+              <h2>{{senator.codigoParlamentar.nomeParlamentar}}</h2>
+              <p>{{senator.codigoParlamentar.formaTratamento}} | {{senator.codigoParlamentar.siglaPartidoParlamentar}}</p>
+            </ion-item>
+          </ion-item-sliding>
+        </div>
+  
+      </div>
+    </ion-list>
+  </ion-content>

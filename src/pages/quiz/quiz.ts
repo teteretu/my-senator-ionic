@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { CateroriesProvider } from '../../providers/caterories/caterories';
-import { SenatorListPage } from '../senator-list/senator-list';
+import { SenatorListByCategoryPage } from '../senator-list-by-category/senator-list-by-category';
 
 /**
  * Generated class for the QuizPage page.
@@ -14,7 +14,7 @@ import { SenatorListPage } from '../senator-list/senator-list';
   selector: 'page-quiz',
   templateUrl: 'quiz.html',
 })
-export class QuizPage {
+export class QuizPage implements OnInit {
   //JSON com todas as categorias
   categories = [];
   filteredCategories = [];
@@ -22,8 +22,13 @@ export class QuizPage {
 
   // mostra categorias de x em x
   showIn = 3;
+  //quantas vezes já passou
+  initialPosition = this.showIn;
 
-  treeTimes = 3;
+  //quantas vezes irá perguntar
+  manyTimes = 0;
+
+  ceil = 0;
 
   constructor(public nav: NavController,
     public navParams: NavParams,
@@ -31,37 +36,39 @@ export class QuizPage {
     public alertCtrl: AlertController) {
   }
 
-  ionViewDidLoad() {
+  async ngOnInit() {
 
-    this.categoriesProvider.getAllCategories().subscribe((category: any) => {
+    await this.categoriesProvider.getAllCategories().subscribe((category: any) => {
       category.categories.forEach(element => {
         element.checked = false;
       });
 
-      // this.categories = category.categories;
+      this.categories = category.categories;
+      this.manyTimes = Math.ceil(this.categories.length / 3);
+      this.ceil = Math.ceil(this.categories.length / 3);
     });
-    this.categories = [{ categoria: "Saúde", checked: false }, { categoria: "Transporte", checked: false }, { categoria: "Trabalho", checked: false },
-    { categoria: "Segurança", checked: false }, { categoria: "Educação", checked: false }, { categoria: "Infraestrutura", checked: false },
-    { categoria: "cat1", checked: false }, { categoria: "cat2", checked: false }, { categoria: "cat3", checked: false },
-    { categoria: "cat3", checked: false }, { categoria: "cat4", checked: false }, { categoria: "cat4", checked: false }];
+    // this.categories = [{ categoria: "Saúde", checked: false }, { categoria: "Transporte", checked: false }, { categoria: "Trabalho", checked: false },
+    // { categoria: "Segurança", checked: false }, { categoria: "Educação", checked: false }, { categoria: "Infraestrutura", checked: false },
+    // { categoria: "cat1", checked: false }, { categoria: "cat2", checked: false }, { categoria: "cat3", checked: false },
+    // { categoria: "cat3", checked: false }, { categoria: "cat4", checked: false }, { categoria: "cat4", checked: false }];
+    setTimeout(() => {
+      if (this.categories.length > 0) {
 
-    if (this.categories.length > 0) {
-
-      this.filteredCategories = this.categories.slice(0, this.showIn);
-      console.log(this.categories);
-    }
+        this.filteredCategories = this.categories.slice(0, this.showIn);
+      }
+    }, 500);
 
   }
 
   back() {
     this.filteredCategories = this.categories;
+    this.filteredCategories = this.filteredCategories.slice(this.initialPosition - (2 * this.showIn), this.initialPosition - this.showIn);
 
-    this.filteredCategories = this.filteredCategories.slice(this.treeTimes - (2 * this.showIn), this.treeTimes - this.showIn);
-
-    this.treeTimes -= 3;
+    this.initialPosition -= this.showIn;
+    this.manyTimes++;
   }
 
-  calculatePreference() {
+  async calculatePreference() {
 
     let filtered = this.filteredCategories.filter(item => item.checked);
 
@@ -76,19 +83,19 @@ export class QuizPage {
     });
 
     if (this.choices.length > 0) {
-      if (this.treeTimes >= this.categories.length) {
+      if (this.initialPosition >= this.categories.length) {
         this.choices = this.categories.filter(item => item.checked)
 
         if (this.choices.length > 0) {
-          this.categoriesProvider.calculatePerfil(this.choices).subscribe((senators: any) => {
-
-            if (senators != null) {
-              this.nav.setRoot(SenatorListPage, { senators });
+          await this.categoriesProvider.calculatePerfil(this.choices).subscribe((senators: any) => {
+            let senatorProvider = senators.senadores;
+            if (senatorProvider != null) {
+              this.nav.setRoot(SenatorListByCategoryPage, { senatorProvider });
               return;
             }
 
           });
-          this.nav.setRoot(SenatorListPage);
+          // this.nav.setRoot(SenatorListPage);
         } else {
           const alert = this.alertCtrl.create({
             title: 'Atenção!',
@@ -102,12 +109,10 @@ export class QuizPage {
         this.categories.forEach((element) => {
           this.filteredCategories.push(element);
         });
-        console.log(this.treeTimes, this.treeTimes + this.showIn);
-        console.log(this.filteredCategories);
-        console.log(this.filteredCategories.slice(this.treeTimes, this.treeTimes + this.showIn));
-        this.filteredCategories = this.filteredCategories.slice(this.treeTimes, this.treeTimes + this.showIn);
+        this.filteredCategories = this.filteredCategories.slice(this.initialPosition, this.initialPosition + this.showIn);
 
-        this.treeTimes += this.showIn;
+        this.initialPosition += this.showIn;
+        this.manyTimes--;
       }
     } else {
       const alert = this.alertCtrl.create({

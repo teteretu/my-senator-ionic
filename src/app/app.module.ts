@@ -21,6 +21,7 @@ import { CateroriesProvider } from '../providers/caterories/caterories';
 import { QuizPage } from "../pages/quiz/quiz";
 import { SenatorInfoPage } from "../pages/senator-info/senator-info";
 import { UserProvider } from "../providers/user/user";
+import { SenatorListByCategoryPage } from "../pages/senator-list-by-category/senator-list-by-category";
 
 // import services
 // end import services
@@ -39,7 +40,8 @@ import { UserProvider } from "../providers/user/user";
     SenatorDetailPage,
     RegisterPage,
     QuizPage,
-    SenatorInfoPage
+    SenatorInfoPage,
+    SenatorListByCategoryPage
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { UserProvider } from "../providers/user/user";
     SenatorDetailPage,
     RegisterPage,
     QuizPage,
-    SenatorInfoPage
+    SenatorInfoPage,
+    SenatorListByCategoryPage
   ],
   providers: [
     StatusBar,

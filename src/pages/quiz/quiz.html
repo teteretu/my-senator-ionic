@@ -24,14 +24,19 @@
     </ion-item>
   </ion-list>
   <p>
-    <button ion-button round *ngIf="treeTimes <= categories?.length-showIn && treeTimes > showIn" icon-start (click)="back()">
+    <button ion-button round *ngIf="manyTimes < ceil && manyTimes > 1" icon-start (click)="back()">
       <ion-icon name="ios-arrow-dropleft-outline"></ion-icon>
       Voltar
     </button>
-    <button ion-button round *ngIf="treeTimes <= categories?.length-showIn" icon-end class="right-btn" (click)="calculatePreference()">
+    <button ion-button round *ngIf="manyTimes > 1" icon-end class="right-btn" (click)="calculatePreference()">
       Próximo
       <ion-icon name="ios-arrow-dropright-outline"></ion-icon>
     </button>
   </p>
-  <button ion-button block (click)="calculatePreference()" *ngIf="treeTimes > categories?.length-showIn">Calcular preferência</button>
+  <p>
+    <button ion-button round *ngIf="manyTimes <= 1" icon-start (click)="back()">
+      <ion-icon name="ios-arrow-dropleft-outline"></ion-icon>
+    </button>
+    <button ion-button round (click)="calculatePreference()" *ngIf="manyTimes <= 1  ">Calcular preferência</button>
+  </p>
 </ion-content>

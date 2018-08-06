@@ -30,3 +30,16 @@ export const STATES: Array<any> = [
     { name: 'Tocantins', initials: 'TO', senators: [] }
   ];
 
+  export const CATEGORIES: Array<any> = [
+    { name: 'ambiental', initials: 'ambiental', senators: [] },
+    { name: 'cultura', initials: 'cultura', senators: [] },
+    { name: 'educação', initials: 'educação', senators: [] },
+    { name: 'eleições', initials: 'eleições', senators: [] },
+    { name: 'idoso', initials: 'idoso', senators: [] },
+    { name: 'imposto', initials: 'imposto', senators: [] },
+    { name: 'previdência', initials: 'previdência', senators: [] },
+    { name: 'saúde', initials: 'saúde', senators: [] },
+    { name: 'segurança', initials: 'segurança', senators: [] },
+    { name: 'trabalhista', initials: 'trabalhista', senators: [] },
+    { name: 'transito', initials: 'transito', senators: [] },
+  ];

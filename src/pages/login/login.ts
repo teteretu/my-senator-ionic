@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { NavController, AlertController, ToastController, MenuController } from "ionic-angular";
 import { RegisterPage } from "../register/register";
 import { UserProvider } from "../../providers/user/user";
@@ -8,7 +8,7 @@ import { QuizPage } from "../quiz/quiz";
   selector: 'page-login',
   templateUrl: 'login.html'
 })
-export class LoginPage {
+export class LoginPage implements OnInit{
 
   loginForm = {
     email: "",
@@ -21,6 +21,11 @@ export class LoginPage {
     public toastCtrl: ToastController,
     public userProvider: UserProvider) {
     this.menu.swipeEnable(false);
+  }
+
+  ngOnInit() {
+    this.loginForm.email = "teteretu@yahoo.com";
+    this.loginForm.password = "teteretuteteretu";
   }
 
   // go to register page
@@ -106,7 +111,7 @@ export class LoginPage {
     } else if (this.loginForm.password == "" || this.loginForm.password == undefined || this.loginForm.password.length <= 8) {
       const alert = this.alertController.create({
         title: 'Atenção!',
-        subTitle: 'Campo de Senha não foi preenchido!',
+        subTitle: 'Campo de Senha não foi preenchido ou é inválido!',
         buttons: ['OK']
       });
       alert.present();

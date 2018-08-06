@@ -33,4 +33,13 @@ export class SenatorProvider {
     
   }
 
+  getSenatorByCod(id) {
+    try {
+      console.log("senator/id", id);
+      return this.http.post( URL_API + '/senator/id', id).map(res => res);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 }
