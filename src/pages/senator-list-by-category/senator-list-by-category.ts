@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { SenatorDetailPage } from '../senator-detail/senator-detail';
 import { SenatorProvider } from '../../providers/senator/senator';
 import { CATEGORIES } from '../../consts/consts';
@@ -22,9 +22,10 @@ export class SenatorListByCategoryPage {
   
   constructor(private navParams: NavParams,
     public navCtrl: NavController,
-    private senatorProvider: SenatorProvider) {
+    private senatorProvider: SenatorProvider,
+    private alertCtrl: AlertController) {
   }
-
+ 
   ionViewWillEnter() {
 
     this.listSenatorByCaregory = this.categoriesList;
@@ -52,13 +53,6 @@ export class SenatorListByCategoryPage {
   public getSenatorByCategory(category) {
     this.listSenatorByCaregory = this.senatorsProvider.filter(index => index.categoria.categoria == category);
 
-    // if (category != undefined) {
-    //   this.senatorProvider.getSenatorBycategory(category.name, category.initials).subscribe((senator: any) => {
-
-    //     this.senatorsProvider = senator.senators.parlamentares;
-    //   });
-    // }
-
   }
 
   async openDetail(senator) {
@@ -70,7 +64,14 @@ export class SenatorListByCategoryPage {
       this.navCtrl.push(SenatorDetailPage, identificacaoParlamentar);
     });
     
-    
+  }
 
+  info() {
+    const alert = this.alertCtrl.create({
+      title: 'Informações!',
+      subTitle: 'A pesquisa e listagem são baseada nos projetos de lei, que os parlamentares apresentaram no decorrer de seus mandatos.',
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }
