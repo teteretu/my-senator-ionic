@@ -20,11 +20,9 @@ export class SenatorDetailPage {
   }
 
   ionViewDidLoad() {
-    console.log(this.navParams);
+    
     this.identificacao = this.navParams.get('identificacaoParlamentar');
     this.mandato = this.navParams.get('mandato');
-    console.log("identificação", this.identificacao);
-    console.log("mandato", this.mandato);
   }
 
 }
