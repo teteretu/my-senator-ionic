@@ -69,7 +69,7 @@ export class SenatorListByCategoryPage {
   info() {
     const alert = this.alertCtrl.create({
       title: 'Informações!',
-      subTitle: 'A pesquisa e listagem são baseada nos projetos de lei, que os parlamentares apresentaram no decorrer de seus mandatos.',
+      subTitle: 'Pesquisa e listagem são baseadas nos projetos de lei que os parlamentares apresentaram no decorrer de seus mandatos.',
       buttons: ['OK']
     });
     alert.present();

@@ -1,7 +1,7 @@
 page-senator-list-by-category {
 
     .top-filter {
-        width: 80%;
+        width: 90%;
     }
 
     .alert-ios .alert-message {
@@ -23,6 +23,10 @@ page-senator-list-by-category {
         right: 1em;
     }
     
+    .item-md .item-button.medal {
+        width: 15%;
+    }
+
     ion-title {
         padding: 25px 10px 10px !important;
     }

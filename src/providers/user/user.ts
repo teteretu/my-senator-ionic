@@ -34,4 +34,13 @@ export class UserProvider {
       return null;
     }
   }
+
+  saveFilter(loginForm) {
+    try {
+      return this.http.post( URL_API + "/user/sign", loginForm).map(res => res);
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
 }

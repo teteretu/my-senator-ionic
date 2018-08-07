@@ -89,13 +89,12 @@ export class QuizPage implements OnInit {
         if (this.choices.length > 0) {
           await this.categoriesProvider.calculatePerfil(this.choices).subscribe((senators: any) => {
             let senatorProvider = senators.senadores;
-            if (senatorProvider != null) {
-              this.nav.setRoot(SenatorListByCategoryPage, { senatorProvider });
-              return;
-            }
+            
 
+            this.nav.setRoot(SenatorListByCategoryPage, { senatorProvider });
+            return;
           });
-          // this.nav.setRoot(SenatorListPage);
+
         } else {
           const alert = this.alertCtrl.create({
             title: 'Atenção!',

@@ -35,15 +35,26 @@
         <div class="right-initials">{{ category?.initials }}</div>
       </ion-list-header>
 
-      <div *ngFor="let senator of category?.categories">
+      <div *ngFor="let senator of category?.categories; let i = index">
         <ion-item-sliding (click)="openDetail(senator)">
           <ion-item>
             <ion-avatar item-start>
               <img [src]="senator.codigoParlamentar.urlFotoParlamentar">
             </ion-avatar>
+
             <h2>{{senator.codigoParlamentar.nomeParlamentar}}</h2>
             <p>{{senator.codigoParlamentar.formaTratamento}} | {{senator.codigoParlamentar.siglaPartidoParlamentar}}</p>
+            <button class="medal" ion-button clear item-end *ngIf="i == 0">
+              <img src="assets/icon/gold-medal.svg" alt="Primeiro">
+            </button>
+            <button class="medal" ion-button clear item-end *ngIf="i == 1">
+              <img src="assets/icon/silver-medal.svg" alt="Segundo">
+            </button>
+            <button class="medal" ion-button clear item-end *ngIf="i == 2">
+              <img src="assets/icon/bronze-medal.svg" alt="Terceiro">
+            </button>
           </ion-item>
+          teste
         </ion-item-sliding>
       </div>
 
