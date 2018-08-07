@@ -19,21 +19,21 @@ export class SenatorListByCategoryPage {
   public senatorsProvider = [];
   public listSenatorByCaregory = [];
   public categoriesList = CATEGORIES;
-  
+
   constructor(private navParams: NavParams,
     public navCtrl: NavController,
     private senatorProvider: SenatorProvider,
     private alertCtrl: AlertController) {
   }
- 
+
   ionViewWillEnter() {
 
     this.listSenatorByCaregory = this.categoriesList;
 
     this.senatorsProvider = this.navParams.get('senatorProvider');
-    
+
     if (this.senatorsProvider != undefined || this.senatorsProvider != null || this.senatorsProvider.length >= 0) {
-      
+
       this.listSenatorByCaregory = this.associateSenatorCategory();
 
     }
@@ -51,25 +51,28 @@ export class SenatorListByCategoryPage {
   }
 
   public getSenatorByCategory(category) {
-    this.listSenatorByCaregory = this.senatorsProvider.filter(index => index.categoria.categoria == category);
+    let aux = this.listSenatorByCaregory[0];
+    this.listSenatorByCaregory = [];
+    this.listSenatorByCaregory.push(aux);
 
+    this.listSenatorByCaregory[0].categories = this.senatorsProvider.filter(index => index.categoria.categoria == category);
   }
 
   async openDetail(senator) {
 
-    this.senatorProvider.getSenatorByCod(senator.codigoParlamentar.codigoParlamentar).subscribe( async (senator: any) => {
+    this.senatorProvider.getSenatorByCod(senator.codigoParlamentar.codigoParlamentar).subscribe(async (senator: any) => {
       let identificacaoParlamentar: any = [];
       identificacaoParlamentar.identificacaoParlamentar = await senator.senator;
-      
+
       this.navCtrl.push(SenatorDetailPage, identificacaoParlamentar);
     });
-    
+
   }
 
   info() {
     const alert = this.alertCtrl.create({
       title: 'Informações!',
-      subTitle: 'Pesquisa e listagem são baseadas nos projetos de lei que os parlamentares apresentaram no decorrer de seus mandatos.',
+      subTitle: 'Lista baseada nos projetos de lei que os parlamentares apresentaram no decorrer de seus mandatos.',
       buttons: ['OK']
     });
     alert.present();

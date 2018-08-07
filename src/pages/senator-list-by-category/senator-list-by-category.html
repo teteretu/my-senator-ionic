@@ -14,7 +14,7 @@
 
         <ion-item>
           <ion-label class="text-1x bold">Filtre a categoria</ion-label>
-          <ion-select [(ngModel)]="category" (ionChange)="getSenatorByCategory(category)">
+          <ion-select [(ngModel)]="category" (ionChange)="getSenatorByCategory(category.name)">
             <ion-option *ngFor="let category of categoriesList" [value]="category">{{ category.name }}</ion-option>
           </ion-select>
         </ion-item>
