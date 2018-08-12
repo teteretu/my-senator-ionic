@@ -1,4 +1,4 @@
-export const URL_API = "http://192.168.10.101:8080/api";
+export const URL_API = "http://localhost:8080/api";
 
 export const STATES: Array<any> = [
     { name: 'Acre', initials: 'AC', senators: [] },

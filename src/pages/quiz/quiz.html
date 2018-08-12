@@ -15,28 +15,30 @@
 
 
 <ion-content padding>
-  <p class="indication">O que é mais relevante para a política?</p>
-  <ion-list *ngFor="let category of filteredCategories">
+  <p class="indication">
+    Selecione as categorias por ordem de importância!
+    <button ion-button clear icon-only (click)="info()" class="btn-info">
+      <ion-icon name="md-information-circle"></ion-icon>
+    </button>
+  </p>
 
-    <ion-item>
-      <ion-label>{{category.categoria}} </ion-label>
-      <ion-checkbox [(ngModel)]="category.checked"></ion-checkbox>
-    </ion-item>
-  </ion-list>
   <p>
-    <button ion-button round *ngIf="manyTimes < ceil && manyTimes > 1" icon-start (click)="back()">
+    <button ion-button round *ngIf="choices.length > 0 && choices.length < until" icon-start (click)="back()">
       <ion-icon name="ios-arrow-dropleft-outline"></ion-icon>
       Voltar
     </button>
-    <button ion-button round *ngIf="manyTimes > 1" icon-end class="right-btn" (click)="calculatePreference()">
-      Próximo
-      <ion-icon name="ios-arrow-dropright-outline"></ion-icon>
-    </button>
   </p>
   <p>
-    <button ion-button round *ngIf="manyTimes <= 1" icon-start (click)="back()">
+    <button ion-button round *ngIf="choices.length >= until" icon-start (click)="back()">
       <ion-icon name="ios-arrow-dropleft-outline"></ion-icon>
     </button>
-    <button ion-button round (click)="calculatePreference()" *ngIf="manyTimes <= 1  ">Calcular preferência</button>
+    <button ion-button round (click)="calculatePreference()" *ngIf="choices.length >= until">Calcular preferência</button>
   </p>
+
+  <ion-list>
+    <button *ngFor="let category of filteredCategories" ion-item (click)="next(category.categoria)">
+      {{category.categoria}}
+    </button>
+  </ion-list>
+
 </ion-content>

@@ -38,7 +38,8 @@ export class MyApp {
     this.appMenuItems = [
       {title: 'Home', component: HomePage, icon: 'home'},
       {title: 'Questionário de Perfil', component: QuizPage, icon: 'ios-create'},
-      {title: 'Lista de Senadores', component: SenatorListPage, icon: 'md-list-box'}
+      {title: 'Lista de Senadores', component: SenatorListPage, icon: 'md-list-box'},
+      {title: 'Papel dos Senadores', component: SenatorListPage, icon: 'md-clipboard'}
     ];
   }
 

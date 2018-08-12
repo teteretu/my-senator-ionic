@@ -4,10 +4,17 @@ page-quiz {
         position: absolute;
         right: 10px;
     }
+    
+    .indication {
+        font-size: 20px;
+        margin: 0 0 15px 0 !important;
+        border-bottom: 2px outset;
+    }
+
+    .btn-info {
+        margin-top: -4px;
+    }
 }
 
-.indication {
-    font-size: 20px;
-    margin: 0 0 15px 0 !important;
-}
+
 

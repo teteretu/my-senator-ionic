@@ -3,7 +3,7 @@
     <name>my-senator-ionic</name>
     <description>my-senator-ionic</description>
     <author email="teteretu@gmail.com" href="https://github.com/teteretu">Matheus C. Melo</author>
-    <content original-src="index.html" src="http://192.168.10.101:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
