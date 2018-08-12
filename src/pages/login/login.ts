@@ -8,7 +8,7 @@ import { QuizPage } from "../quiz/quiz";
   selector: 'page-login',
   templateUrl: 'login.html'
 })
-export class LoginPage implements OnInit{
+export class LoginPage implements OnInit {
 
   loginForm = {
     email: "",
@@ -56,7 +56,7 @@ export class LoginPage implements OnInit{
         }
 
       });
-    
+
     }
   }
 

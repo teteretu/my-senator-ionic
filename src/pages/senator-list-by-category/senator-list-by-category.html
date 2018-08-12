@@ -9,7 +9,7 @@
 
 <ion-content padding class="common-bg">
   <p class="top-filter">
-    <ion-card no-margin margin-bottom>
+    <ion-card no-margin margin-bottom class="top-card">
       <ion-card-content no-padding>
 
         <ion-item>
@@ -18,7 +18,7 @@
             <ion-option *ngFor="let category of categoriesList" [value]="category">{{ category.name }}</ion-option>
           </ion-select>
         </ion-item>
-
+ 
       </ion-card-content>
     </ion-card>
     <ion-fab top right color="light">

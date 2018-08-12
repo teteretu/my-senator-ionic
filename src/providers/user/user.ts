@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { HttpClient } from '../../../node_modules/@angular/common/http';
 import { URL_API } from '../../consts/consts';
+import { AES } from 'crypto-js'; // For AES encryption/decryption
 
 /*
   Generated class for the LoginProvider provider.
@@ -11,14 +12,24 @@ import { URL_API } from '../../consts/consts';
 */
 @Injectable()
 export class UserProvider {
-
+  secret = "Exadsgdhg12436!&@%";
+  
   constructor(public http: HttpClient) {
   }
 
   signUp(registerForm) {
 
     try {
-      return this.http.post( URL_API + "/user/signUp", registerForm).map(res => res);
+      let register = {
+        name: "",
+        password: "",
+        email: ""
+      };
+      register.name = registerForm.name;
+      register.password = AES.encrypt(registerForm.password, this.secret).toString();
+      register.email = AES.encrypt(registerForm.email, this.secret).toString();
+
+      return this.http.post( URL_API + "/user/signUp", register).map(res => res);
     } catch (error) {
       console.error(error);
       return null;
@@ -28,19 +39,19 @@ export class UserProvider {
   sign(loginForm) {
 
     try {
-      return this.http.post( URL_API + "/user/sign", loginForm).map(res => res);
+      let login = {
+        password : "",
+        email: ""
+      };
+
+      login.password = AES.encrypt(loginForm.password, this.secret).toString();
+      login.email = AES.encrypt(loginForm.email, this.secret).toString();
+
+      return this.http.post( URL_API + "/user/sign", login).map(res => res);
     } catch (error) {
       console.error(error);
       return null;
     }
   }
 
-  saveFilter(loginForm) {
-    try {
-      return this.http.post( URL_API + "/user/sign", loginForm).map(res => res);
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  }
 }
