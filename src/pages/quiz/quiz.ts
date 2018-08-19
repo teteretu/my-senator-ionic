@@ -87,8 +87,17 @@ export class QuizPage implements OnInit {
     if (this.choices.length >= this.until) {
 
       await this.categoriesProvider.calculatePerfil(this.choices).subscribe((senators: any) => {
-        let senatorProvider = senators.senadores;
+        let senatorProvider: any = senators.senadores;
 
+        //ordena para o que tem maior valor
+        senatorProvider.sort(function (a, b) {
+          if (a.numero_pls > b.numero_pls)
+            return -1;
+          if (a.numero_pls < b.numero_pls)
+            return 1;
+          return 0;
+        });
+        
         this.navCtrl.setRoot(SenatorListByCategoryPage, { senatorProvider });
         return;
       });

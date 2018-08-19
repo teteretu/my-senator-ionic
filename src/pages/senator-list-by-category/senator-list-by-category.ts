@@ -16,7 +16,9 @@ import { CATEGORIES } from '../../consts/consts';
   templateUrl: 'senator-list-by-category.html',
 })
 export class SenatorListByCategoryPage {
-  public senatorsProvider = [];
+
+  //variável que vem da tela de análise de perfil (Quiz)
+  public senatorsProvider: any = [];
   public listSenatorByCaregory = [];
   public categoriesList = CATEGORIES;
 
@@ -33,22 +35,37 @@ export class SenatorListByCategoryPage {
     this.senatorsProvider = this.navParams.get('senatorProvider');
 
     if (this.senatorsProvider != undefined || this.senatorsProvider != null || this.senatorsProvider.length >= 0) {
+      let podium = 1;
 
-      this.listSenatorByCaregory = this.associateSenatorCategory();
+      for (let i = 0; i < this.senatorsProvider.length; i++) {
+        
+        if (podium < 4) {
+          this.senatorsProvider[i].podium = podium;
+          //enquanto o próximo valor de pls for igual
+          while (this.senatorsProvider[i].numero_pls == this.senatorsProvider[i + 1].numero_pls) {
+            this.senatorsProvider[++i].podium = podium;
+          }
+          podium++;
+        } else {
+          break;
+        }
+      }
 
+      this.listSenatorByCaregory = this.senatorsProvider;
+      console.log("result1", this.listSenatorByCaregory);
     }
 
   }
 
-  public associateSenatorCategory() {
+  // public associateSenatorCategory() {
+  //   this.categoriesList.forEach((element) => {
+  //     element.categories = this.senatorsProvider.filter(index => index.categoria.categoria == element.initials);
+  //     if (podium < 4)
+  //       element.position = podium;
+  //   });
 
-    this.categoriesList.forEach((element) => {
-      element.categories = this.senatorsProvider.filter(index => index.categoria.categoria == element.initials);
-
-    });
-
-    return this.categoriesList;
-  }
+  //   return this.categoriesList;
+  // }
 
   public getSenatorByCategory(category) {
     let aux = this.listSenatorByCaregory[0];

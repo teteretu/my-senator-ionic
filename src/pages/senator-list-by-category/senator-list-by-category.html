@@ -18,7 +18,7 @@
             <ion-option *ngFor="let category of categoriesList" [value]="category">{{ category.name }}</ion-option>
           </ion-select>
         </ion-item>
- 
+
       </ion-card-content>
     </ion-card>
     <ion-fab top right color="light">
@@ -28,14 +28,14 @@
     </ion-fab>
   </p>
 
-  <ion-list *ngFor="let category of listSenatorByCaregory">
-    <div *ngIf="category?.categories?.length > 0">
+  <ion-list>
+    <div>
       <ion-list-header>
-        <div class="block">{{ category?.name }}</div>
-        <div class="right-initials">{{ category?.initials }}</div>
+        <div class="block">Ranking de Senadores por categoria</div>
+        <!-- <div class="right-initials">PE</div> -->
       </ion-list-header>
 
-      <div *ngFor="let senator of category?.categories; let i = index">
+      <div *ngFor="let senator of listSenatorByCaregory">
         <ion-item-sliding (click)="openDetail(senator)">
           <ion-item>
             <ion-avatar item-start>
@@ -44,13 +44,13 @@
 
             <h2>{{senator.codigoParlamentar.nomeParlamentar}}</h2>
             <p>{{senator.codigoParlamentar.formaTratamento}} | {{senator.codigoParlamentar.siglaPartidoParlamentar}}</p>
-            <button class="medal" ion-button clear item-end *ngIf="i == 0">
+            <button class="medal" ion-button clear item-end *ngIf="senator.podium == 1">
               <img src="assets/icon/gold-medal.svg" alt="Primeiro">
             </button>
-            <button class="medal" ion-button clear item-end *ngIf="i == 1">
+            <button class="medal" ion-button clear item-end *ngIf="senator.podium == 2">
               <img src="assets/icon/silver-medal.svg" alt="Segundo">
             </button>
-            <button class="medal" ion-button clear item-end *ngIf="i == 2">
+            <button class="medal" ion-button clear item-end *ngIf="senator.podium == 3">
               <img src="assets/icon/bronze-medal.svg" alt="Terceiro">
             </button>
           </ion-item>
