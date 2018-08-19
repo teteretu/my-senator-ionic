@@ -27,7 +27,7 @@ export class HomePage {
     this.storage.get('pickup').then((val) => {
       
     }).catch((err) => {
-      console.log(err)
+      console.error(err)
     });
   }
 

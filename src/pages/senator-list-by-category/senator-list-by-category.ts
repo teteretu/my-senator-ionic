@@ -52,7 +52,6 @@ export class SenatorListByCategoryPage {
       }
 
       this.listSenatorByCaregory = this.senatorsProvider;
-      console.log("result1", this.listSenatorByCaregory);
     }
 
   }

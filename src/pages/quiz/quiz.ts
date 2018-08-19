@@ -82,7 +82,6 @@ export class QuizPage implements OnInit {
 
   async calculatePreference() {
 
-    console.log(this.choices);
     //se ele escolheu no mínimo o valor de until
     if (this.choices.length >= this.until) {
 
