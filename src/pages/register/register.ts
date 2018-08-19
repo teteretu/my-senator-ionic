@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController, AlertController } from "ionic-angular";
+import { NavController, AlertController, LoadingController } from "ionic-angular";
 import { LoginPage } from "../login/login";
 import { UserProvider } from "../../providers/user/user";
 
@@ -15,19 +15,28 @@ export class RegisterPage {
     name: ""
   }
 
+  loading;
+
   constructor(public nav: NavController,
     public alertController: AlertController,
-    public loginProvider: UserProvider) {
+    public loginProvider: UserProvider,
+    public loadingCtrl: LoadingController) {
   }
 
   // register and go to home page
   signUp() {
     if (this.checkFields()) {
+      
+      this.activeLoading();
+
       this.loginProvider.signUp(this.registerForm).subscribe((responseBack: any) => {
 
         let response = responseBack;
 
         if (response != null) {
+          
+          this.loading.dismiss();
+
           const alert = this.alertController.create({
             title: 'Sucesso!',
             subTitle: 'Cadastro realizado com sucesso!',
@@ -38,6 +47,9 @@ export class RegisterPage {
           }
 
         } else {
+
+          this.loading.dismiss();
+
           const alert = this.alertController.create({
             title: 'Atenção!',
             subTitle: 'Algo deu errado no seu cadastro!',
@@ -47,7 +59,8 @@ export class RegisterPage {
           return false;
         }
       });
-
+      
+      this.loading.dismiss();
     }
   }
 
@@ -96,4 +109,13 @@ export class RegisterPage {
       return true;
     }
   }
+
+  activeLoading() {
+    this.loading = this.loadingCtrl.create({
+      content: "Só um momento!!"
+    });
+
+    this.loading.present();
+  }
+
 }

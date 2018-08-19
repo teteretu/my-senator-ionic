@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { SenatorProvider } from '../../providers/senator/senator';
 import { SenatorDetailPage } from '../senator-detail/senator-detail';
 import { STATES } from '../../consts/consts';
@@ -13,21 +13,29 @@ export class SenatorListPage {
   public listSenatorByState = [];
   public stateList = STATES;
 
+  loading;
+
   constructor(public navCtrl: NavController,
-    private senatorProvider: SenatorProvider) {
+    private senatorProvider: SenatorProvider,
+    public loadingCtrl: LoadingController) {
   }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
 
     this.listSenatorByState = this.stateList;
+    
+    this.activeLoading();
+    
+    await this.senatorProvider.getSenators().subscribe( (senator: any) => {
 
-    this.senatorProvider.getSenators().subscribe(async (senator: any) => {
-
-      this.senatorsProvider = await senator.senators.parlamentares;
+      this.senatorsProvider = senator.senators.parlamentares;
       this.listSenatorByState = this.associateSenatorState();
+
+      this.loading.dismiss();
 
     });
 
+    this.loading.dismiss();
   }
 
   public associateSenatorState() {
@@ -45,10 +53,16 @@ export class SenatorListPage {
     this.listSenatorByState.push(state);
 
     if (state != undefined) {
+      
+      this.activeLoading();
+
       this.senatorProvider.getSenatorByState(state.name, state.initials).subscribe((senator: any) => {
 
         this.senatorsProvider = senator.senators.parlamentares;
+
+        this.loading.dismiss();
       });
+
     }
 
   }
@@ -57,4 +71,13 @@ export class SenatorListPage {
     this.navCtrl.push(SenatorDetailPage, senator);
 
   }
+  
+  activeLoading() {
+    this.loading = this.loadingCtrl.create({
+      content: "Só um momento!!"
+    });
+
+    this.loading.present();
+  }
+
 }

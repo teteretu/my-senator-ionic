@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, AlertController, NavController } from 'ionic-angular';
+import { NavParams, AlertController, NavController, LoadingController } from 'ionic-angular';
 import { CateroriesProvider } from '../../providers/caterories/caterories';
 import { SenatorListByCategoryPage } from '../senator-list-by-category/senator-list-by-category';
 
@@ -23,14 +23,18 @@ export class QuizPage implements OnInit {
   // escolher pelo menos 3 candidatos
   until = 3;
 
+  loading;
+
   constructor(public navParams: NavParams,
     public categoriesProvider: CateroriesProvider,
     public alertCtrl: AlertController,
-    public navCtrl: NavController) {
+    public navCtrl: NavController,
+    public loadingCtrl: LoadingController) {
   }
 
   async ngOnInit() {
 
+    this.activeLoading();
     await this.categoriesProvider.getAllCategories().subscribe((category: any) => {
 
       this.categoriesInitial = category.categories;
@@ -43,6 +47,7 @@ export class QuizPage implements OnInit {
         return 0;
       });
 
+      this.loading.dismiss();
     });
 
   }
@@ -84,7 +89,8 @@ export class QuizPage implements OnInit {
 
     //se ele escolheu no mínimo o valor de until
     if (this.choices.length >= this.until) {
-
+      
+      this.activeLoading();
       await this.categoriesProvider.calculatePerfil(this.choices).subscribe((senators: any) => {
         let senatorProvider: any = senators.senadores;
 
@@ -96,12 +102,21 @@ export class QuizPage implements OnInit {
             return 1;
           return 0;
         });
-        
+        this.loading.dismiss();
         this.navCtrl.setRoot(SenatorListByCategoryPage, { senatorProvider });
         return;
       });
+      this.loading.dismiss();
     }
 
+  }
+
+  activeLoading() {
+    this.loading = this.loadingCtrl.create({
+      content: "Só um momento!!"
+    });
+
+    this.loading.present();
   }
 
 }

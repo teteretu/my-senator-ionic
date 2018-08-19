@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { SenatorDetailPage } from '../senator-detail/senator-detail';
 import { SenatorProvider } from '../../providers/senator/senator';
 import { CATEGORIES } from '../../consts/consts';
@@ -22,10 +22,13 @@ export class SenatorListByCategoryPage {
   public listSenatorByCaregory = [];
   public categoriesList = CATEGORIES;
 
+  loading;
+  
   constructor(private navParams: NavParams,
     public navCtrl: NavController,
     private senatorProvider: SenatorProvider,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewWillEnter() {
@@ -75,14 +78,18 @@ export class SenatorListByCategoryPage {
   }
 
   async openDetail(senator) {
+    
+    this.activeLoading();
 
-    this.senatorProvider.getSenatorByCod(senator.codigoParlamentar.codigoParlamentar).subscribe(async (senator: any) => {
+    await this.senatorProvider.getSenatorByCod(senator.codigoParlamentar.codigoParlamentar).subscribe( (senator: any) => {
       let identificacaoParlamentar: any = [];
-      identificacaoParlamentar.identificacaoParlamentar = await senator.senator;
+      identificacaoParlamentar.identificacaoParlamentar = senator.senator;
 
       this.navCtrl.push(SenatorDetailPage, identificacaoParlamentar);
+      
+      this.loading.dismiss();
     });
-
+    
   }
 
   info() {
@@ -93,4 +100,13 @@ export class SenatorListByCategoryPage {
     });
     alert.present();
   }
+
+  activeLoading() {
+    this.loading = this.loadingCtrl.create({
+      content: "Só um momento!!"
+    });
+
+    this.loading.present();
+  }
+  
 }

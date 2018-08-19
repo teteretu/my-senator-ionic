@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { NavController, AlertController, ToastController, MenuController } from "ionic-angular";
+import { NavController, AlertController, ToastController, MenuController, LoadingController } from "ionic-angular";
 import { RegisterPage } from "../register/register";
 import { UserProvider } from "../../providers/user/user";
 import { QuizPage } from "../quiz/quiz";
@@ -15,11 +15,14 @@ export class LoginPage implements OnInit {
     password: ""
   }
 
+  loading;
+
   constructor(public nav: NavController,
     public alertController: AlertController,
     public menu: MenuController,
     public toastCtrl: ToastController,
-    public userProvider: UserProvider) {
+    public userProvider: UserProvider,
+    public loadingCtrl: LoadingController) {
     this.menu.swipeEnable(false);
   }
 
@@ -38,6 +41,7 @@ export class LoginPage implements OnInit {
 
     if (this.checkFields()) {
 
+      this.activeLoading();
       this.userProvider.sign(this.loginForm).subscribe((responseBack: any) => {
 
         let response = responseBack;
@@ -57,6 +61,7 @@ export class LoginPage implements OnInit {
 
       });
 
+      this.loading.dismiss();
     }
   }
 
@@ -118,12 +123,23 @@ export class LoginPage implements OnInit {
       return false;
     } else {
 
+      this.activeLoading();
       let user = this.userProvider.sign(this.loginForm);
+      this.loading.dismiss();
+      
       if (user != null && user) {
         return true;
       }
     }
 
+  }
+
+  activeLoading() {
+    this.loading = this.loadingCtrl.create({
+      content: "Só um momento!!"
+    });
+
+    this.loading.present();
   }
 
 }
