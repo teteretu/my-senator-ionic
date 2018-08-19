@@ -9,6 +9,7 @@ import { HomePage } from "../pages/home/home";
 import { LoginPage } from "../pages/login/login";
 import { SenatorListPage } from "../pages/senator-list/senator-list";
 import { QuizPage } from "../pages/quiz/quiz";
+import { SenatorInfoPage } from "../pages/senator-info/senator-info";
 
 export interface MenuItem {
     title: string;
@@ -39,7 +40,7 @@ export class MyApp {
       {title: 'Home', component: HomePage, icon: 'home'},
       {title: 'Questionário de Perfil', component: QuizPage, icon: 'ios-create'},
       {title: 'Lista de Senadores', component: SenatorListPage, icon: 'md-list-box'},
-      {title: 'Papel dos Senadores', component: SenatorListPage, icon: 'md-clipboard'}
+      {title: 'Papel dos Senadores', component: SenatorInfoPage, icon: 'md-clipboard'}
     ];
   }
 
