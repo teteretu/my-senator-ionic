@@ -82,10 +82,8 @@ export class SenatorListByCategoryPage {
     this.activeLoading();
 
     await this.senatorProvider.getSenatorByCod(senator.codigoParlamentar.codigoParlamentar).subscribe( (senator: any) => {
-      let identificacaoParlamentar: any = [];
-      identificacaoParlamentar.identificacaoParlamentar = senator.senator;
 
-      this.navCtrl.push(SenatorDetailPage, identificacaoParlamentar);
+      this.navCtrl.push(SenatorDetailPage, senator);
       
       this.loading.dismiss();
     });

@@ -39,11 +39,11 @@
         <ion-item-sliding (click)="openDetail(senator)">
           <ion-item>
             <ion-avatar item-start>
-              <img [src]="senator.codigoParlamentar.urlFotoParlamentar">
+              <img [src]="senator.codigoParlamentar?.urlFotoParlamentar">
             </ion-avatar>
 
-            <h2>{{senator.codigoParlamentar.nomeParlamentar}}</h2>
-            <p>{{senator.codigoParlamentar.formaTratamento}} | {{senator.codigoParlamentar.siglaPartidoParlamentar}}</p>
+            <h2>{{senator.codigoParlamentar?.nomeParlamentar}}</h2>
+            <p>{{senator.codigoParlamentar?.formaTratamento}} | {{senator.codigoParlamentar?.siglaPartidoParlamentar}}</p>
             <button class="medal" ion-button clear item-end *ngIf="senator.podium == 1">
               <img src="assets/icon/gold-medal.svg" alt="Primeiro">
             </button>

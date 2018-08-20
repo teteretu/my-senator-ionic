@@ -7,25 +7,34 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{identificacao.nomeParlamentar}}</ion-title>
+    <ion-title>{{identificacao?.nomeParlamentar}}</ion-title>
   </ion-navbar>
 
 </ion-header>
-
 
 <ion-content padding>
   <ion-card>
     <img [src]="identificacao.urlFotoParlamentar" />
     <ion-card-content>
       <ion-card-title>
-        {{identificacao.nomeParlamentar}} | {{identificacao.siglaPartidoParlamentar}}
+        {{identificacao?.nomeParlamentar}} | {{identificacao.siglaPartidoParlamentar}}
       </ion-card-title>
       <p>
         <strong>Email: </strong> {{identificacao.emailParlamentar}}
       </p>
       <p>
-        <strong>Site: </strong> <a href="{{identificacao.urlPaginaParlamentar}}" target="_blank">Pagina do Parlamentar</a>
+        <strong>Site: </strong>
+        <a href="{{identificacao.urlPaginaParlamentar}}" target="_blank">Pagina do Parlamentar</a>
       </p>
+
+      <!-- <div *ngIf="projetosLei != undefined"> -->
+      <ion-list *ngFor="let projeto of projetosLei.materias">
+        <button ion-item (click) = "openDetail(projeto)">
+          {{projeto.ementaMateria}}
+        </button>
+
+      </ion-list>
+
     </ion-card-content>
   </ion-card>
 </ion-content>

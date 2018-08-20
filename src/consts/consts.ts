@@ -1,5 +1,5 @@
-// export const URL_API = "http://localhost:8080/api";
-export const URL_API = "http://mysenador.herokuapp.com/api";
+export const URL_API = "http://localhost:8080/api";
+// export const URL_API = "http://mysenador.herokuapp.com/api";
 
 export const STATES: Array<any> = [
     { name: 'Acre', initials: 'AC', senators: [] },

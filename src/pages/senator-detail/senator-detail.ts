@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the SenatorDetailPage page.
@@ -12,17 +12,30 @@ import { NavController, NavParams } from 'ionic-angular';
   selector: 'page-senator-detail',
   templateUrl: 'senator-detail.html',
 })
-export class SenatorDetailPage {
+export class SenatorDetailPage implements OnInit {
 
-  identificacao = "";
-  mandato = "";
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  identificacao: any;
+  projetosLei: any;
+
+  constructor(public navCtrl: NavController, 
+      private alertCtrl: AlertController, 
+      public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
+  ngOnInit() {
     
-    this.identificacao = this.navParams.get('identificacaoParlamentar');
-    this.mandato = this.navParams.get('mandato');
+    this.identificacao = this.navParams.get('senator');
+    this.projetosLei = this.navParams.get('projetosLei');
+    
+    console.log("projet ", this.projetosLei);
   }
 
+  openDetail(projeto) {
+    const alert = this.alertCtrl.create({
+      title: projeto.categoria,
+      subTitle: projeto.ementaMateria,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 }
